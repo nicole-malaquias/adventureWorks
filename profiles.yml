@@ -1,0 +1,11 @@
+adventure_works:   # Nome do perfil
+  target: dev     # Alvo padrão
+  outputs:        # Configurações de saída
+    dev:          # Nome da configuração de saída
+      type: bigquery
+      method: service-account
+      project: "{{env_var('BG_PRJECT_ID')}}" # ID do projeto GCP
+      dataset: "{{env_var('BG_DATASET')}}"       # Nome do dataset no BigQuery
+      threads: 4                      # Número de threads a serem usadas
+      timeout_seconds: 300            # Tempo limite opcional em segundos
+      keyfile: "./token.json" 

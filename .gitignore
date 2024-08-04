@@ -10,6 +10,7 @@ __pycache__/
 # C extensions
 *.so
 
+
 # Distribution / packaging
 .Python
 build/
@@ -163,3 +164,6 @@ logs/
 dbt_packages
 .user.yml
 .ci/user.yml
+
+##token
+token.json
