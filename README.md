@@ -30,9 +30,9 @@ Certifique-se de que você está na pasta onde o ambiente virtual foi criado. Se
 
 O próximo passo é instalar as bibliotecas listadas no arquivo **requirements.txt**.  Isso pode ser feito via [pip](https://pypi.org/project/pip/):
 
-- `pip install -r requirements.txt` or
+- `pip install -r requirements.txt` ou
 
-- `python -m pip install -r requirements.txt` for some cases where the previous command doesn't work.
+- `python -m pip install -r requirements.txt` 
 
 Para verificar se todas as bibliotecas foram instaladas corretamente, use **pip list** e valide as bibliotecas e suas respectivas versões listadas.
 
