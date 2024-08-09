@@ -2,16 +2,16 @@ with
     source as (
     select 
         -- Primary Key
-        salesorderid
+        salesorderid_pk
 
         -- Foreign Key
-        , creditcardid
-        , customerid
-        , territoryid
-        , billtoaddressid
-        , shiptoaddressid
-        , shipmethodid
-        , currencyrateid
+        , creditcardid_fk
+        , customerid_fk
+        , territoryid_fk
+        , billtoaddressid_fk
+        , shiptoaddressid_fk
+        , shipmethodid_fk
+        , currencyrateid_fk
 
         -- Stich Columns
         , cast(orderdate as timestamp) as orderdate
