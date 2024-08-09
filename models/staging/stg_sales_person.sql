@@ -13,8 +13,10 @@ with
             , commissionpct as commissionpct
             , salesytd as salesytd
             , saleslastyear as saleslastyear
-            , rowguid as rowguid_sk
             , modifieddate
+            
+            -- Surrogate Key
+            , rowguid as rowguid_sk
         from {{ source('adventure_works', 'salesperson') }}
     )   
 

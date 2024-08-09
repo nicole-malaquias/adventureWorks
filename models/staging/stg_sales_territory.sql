@@ -12,8 +12,10 @@ with
             , saleslastyear
             , costytd
             , costlastyear	
-            , rowguid as rowguid_sk
             , modifieddate
+
+            -- Surrogate Key
+            , rowguid as rowguid_sk
         from {{ source('adventure_works', 'salesterritory') }}
     )
 
