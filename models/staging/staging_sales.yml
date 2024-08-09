@@ -173,3 +173,46 @@ sources:
           description: 'Identificador exclusivo para o registro.'
         - name: modifieddate
           description: 'Data e hora da última modificação do registro.'
+
+    - name: salesterritory
+      description: "Tabela que armazena informações sobre os territórios de vendas."
+      columns:
+        - name: territoryid
+          description: 'Chave primária. Identificação única do território de vendas.'
+          tests:
+            - unique
+            - not_null
+        - name: name
+          description: 'Nome do território de vendas.'
+          tests:
+            - not_null
+        - name: countryregioncode
+          description: 'Código de região do país.'
+          tests:
+            - not_null
+        - name: group
+          description: 'Grupo de territórios de vendas.'
+          tests:
+            - not_null
+        - name: salesytd
+          description: 'Vendas realizadas no território de vendas no ano até a data.'
+          tests:
+            - not_null
+        - name: saleslastyear
+          description: 'Vendas realizadas no território de vendas no ano anterior.'
+          tests:
+            - not_null
+        - name: costytd
+          description: 'Custo acumulado no território de vendas no ano até a data.'
+          tests:
+            - not_null
+        - name: costlastyear
+          description: 'Custo acumulado no território de vendas no ano anterior.'
+          tests:
+            - not_null
+        - name: rowguid
+          description: 'Identificador exclusivo para o registro.'
+        - name: modifieddate
+          description: 'Data e hora da última modificação do registro.'
+
+    # - name: product
