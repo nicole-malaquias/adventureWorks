@@ -2,12 +2,12 @@ with
     source as (
     select 
         -- Primary Key
-        salesorderdetailid_sk
+        salesorderdetailid as salesorderdetail_pk
 
         -- Foreign Key
-        , salesorderid_fk
-        , productid_fk
-        , specialofferid_fk
+        , salesorderid as salesorder_pk
+        , productid as product_pk
+        , specialofferid as specialoffer_pk
 
         -- Stich Columns
         , carriertrackingnumber
