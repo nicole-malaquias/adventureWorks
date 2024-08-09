@@ -1,0 +1,92 @@
+version: 2
+
+sources:
+  - name: adventure_works 
+    database: adventure-works-431420 
+    schema: sap_adw
+    tables:
+    - name: salesorderheader
+      description: "Tabela que armazena os cabeçalhos dos pedidos de venda."
+      columns:
+        - name: salesorderid
+          description: "Chave primária. Identificação única do pedido de venda."
+          tests:
+            - unique
+            - not_null
+        - name: revisionnumber
+          description: "Número incremental para rastrear alterações no pedido de venda ao longo do tempo. Padrão: 0"
+          tests:
+            - not_null
+        - name: orderdate
+          description: "Data em que o pedido de venda foi criado. Padrão: getdate()"
+          tests:
+            - not_null
+        - name: duedate
+          description: "Data de vencimento do pedido para o cliente."
+          tests:
+            - not_null
+        - name: shipdate
+          description: "Data de envio do pedido para o cliente."
+          tests:
+            - not_null
+        - name: status
+          description: "Status atual do pedido. 1 = Em processo; 2 = Aprovado; 3 = Em espera; 4 = Rejeitado; 5 = Enviado; 6 = Cancelado. Padrão: 1"
+          tests:
+            - not_null
+        - name: onlineorderflag
+          description: "0 = Pedido feito por vendedor. 1 = Pedido feito online pelo cliente. Padrão: 1"
+          tests:
+            - not_null
+        - name: accountnumber
+          description: "Número de referência contábil."
+        - name: customerid
+          description: "Número de identificação do cliente. Chave estrangeira para Customer."
+          tests:
+            - not_null
+            - relationship:
+                to: ref('stg_customer')
+                field: customerid
+        - name: territoryid
+          description: "Território onde a venda foi feita. Chave estrangeira para SalesTerritory.SalesTerritoryID."
+          tests:
+            - not_null
+            - relationship:
+                to: ref('stg_sales_territory')
+                field: salesterritoryid
+        - name: billtoaddressid
+          description: "Endereço de cobrança do cliente. Chave estrangeira para Address.AddressID."
+        - name: shiptoaddressid
+          description: "Endereço de envio do cliente. Chave estrangeira para Address.AddressID."
+        - name: shipmethodid
+          description: "Método de envio. Chave estrangeira para ShipMethod.ShipMethodID."
+        - name: creditcardid
+          description: "Número de identificação do cartão de crédito. Chave estrangeira para CreditCard.CreditCardID."
+          tests:
+            - relationship:
+                to: ref('stg_creditcard')
+                field: creditcardid
+        - name: creditcardapprovalcode
+          description: "Código de aprovação fornecido pela empresa de cartão de crédito."
+        - name: currencyrateid
+          description: "Taxa de câmbio utilizada. Chave estrangeira para CurrencyRate.CurrencyRateID."
+        - name: subtotal
+          description: "Subtotal das vendas. Calculado como SUM(SalesOrderDetail.LineTotal) para o SalesOrderID apropriado. Padrão: 0.00"
+        - name: taxamt
+          description: "Valor do imposto. Padrão: 0.00"
+        - name: freight
+          description: "Custo de envio. Padrão: 0.00"
+        - name: totaldue
+          description: "Total devido pelo cliente. Calculado como Subtotal + TaxAmt + Freight."
+          tests:
+            - not_null
+        - name: comment
+          description: "Comentários do representante de vendas."
+        - name: rowguid
+          description: "Número que identifica exclusivamente o registro. Usado para suportar uma amostra de replicação de mesclagem. Padrão: newid()"
+          tests:
+            - unique
+            - not_null
+        - name: modifieddate
+          description: "Data e hora da última atualização do registro. Padrão: getdate()"
+          tests:
+            - not_null
