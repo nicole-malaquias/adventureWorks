@@ -141,3 +141,35 @@ sources:
           description: "Data e hora da última atualização do registro. Padrão: getdate()"
           tests:
             - not_null
+    
+    - name: salesperson
+      description: "Tabela que armazena informações sobre os vendedores." 
+      columns:
+        - name: businessentityid
+          description: 'Chave primária. Identificação única do vendedor.'
+          tests:
+            - unique
+            - not_null
+        - name: territoryid
+          description: 'Território de vendas associado ao vendedor.'
+          tests:
+            - not_null
+            - relationships:
+                to: ref('stg_sales_territory')
+                field: salesterritoryid
+        - name: salesquota
+          description: 'Meta de vendas estabelecida para o vendedor.'
+          tests:
+            - not_null
+        - name: bonus
+          description: 'Bônus recebido pelo vendedor.'
+        - name: commissionpct
+          description: 'Percentual de comissão do vendedor.'
+        - name: salesytd
+          description: 'Vendas realizadas pelo vendedor no ano até a data.'
+        - name: saleslastyear
+          description: 'Vendas realizadas pelo vendedor no ano anterior.'
+        - name: rowguid
+          description: 'Identificador exclusivo para o registro.'
+        - name: modifieddate
+          description: 'Data e hora da última modificação do registro.'

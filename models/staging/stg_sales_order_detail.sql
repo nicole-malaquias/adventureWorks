@@ -16,7 +16,6 @@ with
         , unitpricediscount
         , rowguid_sk
         , modifieddate
-
     from {{ source('adventure_works', 'salesorderdetail') }}
     )   
 
