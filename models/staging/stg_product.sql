@@ -31,8 +31,6 @@ with
             , discontinueddate
             , modifieddate
             
-            -- Surrogate Key
-            , rowguid as rowguid_sk
         from {{ source('adventure_works', 'product') }}
     )   
 

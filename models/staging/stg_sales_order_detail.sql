@@ -16,8 +16,6 @@ with
             , unitpricediscount
             , modifieddate
             
-            -- Surrogate Key
-            , rowguid_sk
         from {{ source('adventure_works', 'salesorderdetail') }}
     )   
 

@@ -2,7 +2,7 @@ with
     source as (
         select
             -- Primary Key
-            purchaseorderid as purchaseorder_sk
+            purchaseorderid as purchaseorder_pk
 
             -- Foreign Keys
             , employeeid as employee_fk

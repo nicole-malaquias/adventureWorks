@@ -3,7 +3,7 @@ with
         select
 
             -- Primary Key
-            purchaseorderid as purchaseorderdetail_sk
+            purchaseorderid as purchaseorderdetail_pk
 
             -- Foreign Keys
             , purchaseorderdetailid as purchaseorderdetail_fk

@@ -22,9 +22,7 @@ with
             , accountnumber
             , creditcardapprovalcode
             , subtotal
-            , taxamt   
-            -- Surrogate Key
-            , rowguid as rowguid_sk  
+            , taxamt
         from {{ source('adventure_works', 'salesorderheader') }}
     )   
 

@@ -12,8 +12,6 @@ with
             , quantity
             , modifieddate
             
-            -- Surrogate Key
-            , rowguid
         from {{ source('adventure_works', 'productinventory') }}
     )   
     

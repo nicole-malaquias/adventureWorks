@@ -53,4 +53,4 @@ models:
 seeds:
   adventure_works: 
     sap_adventure_works:
-      +schema: sap_adw
+      +schema: raw_sap

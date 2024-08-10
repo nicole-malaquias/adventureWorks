@@ -7,9 +7,6 @@ with
             -- Stich Columns
             , name
             , modifieddate
-
-            -- Surrogate key
-            , rowguid as rowguid_sk
             
         from {{ source('adventure_works', 'productcategory') }}
     )   

@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: adventure_works 
     database: adventure-works-431420 
-    schema: sap_adw
+    schema: raw_sap
     tables:
 
     - name: purchaseorderheader
