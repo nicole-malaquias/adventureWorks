@@ -1,0 +1,81 @@
+version: 2
+
+sources:
+  - name: adventure_works 
+    database: adventure-works-431420 
+    schema: sap_adw
+    tables:
+
+    - name: purchaseorderheader
+      description: 'Tabela contendo informações detalhadas sobre os pedidos de compra.'
+      columns:
+        - name: PurchaseOrderID
+          description: 'Identificação única do pedido de compra.'
+        - name: RevisionNumber
+          description: 'Número de revisão do pedido de compra.'
+        - name: Status
+          description: 'Status do pedido de compra.'
+          tests:
+            - accepted_values:
+                values: [1, 2, 3, 4, 5]
+        - name: EmployeeID
+          description: 'Identificação do funcionário que criou o pedido de compra.'
+        - name: VendorID
+          description: 'Identificação do fornecedor.'
+        - name: ShipMethodID
+          description: 'Identificação do método de envio.'
+        - name: OrderDate
+          description: 'Data do pedido.'
+        - name: ShipDate
+          description: 'Data de envio.'
+        - name: SubTotal
+          description: 'Subtotal do pedido.'
+        - name: TaxAmt
+          description: 'Valor do imposto.'
+        - name: Freight
+          description: 'Valor do frete.'
+        - name: TotalDue
+          description: 'Valor total devido.'
+        - name: ModifiedDate
+          description: 'Data de modificação do pedido.'
+
+    - name: purchaseorderdetail
+      description: 'Tabela contendo informações detalhadas sobre os produtos de um pedido de compra.'
+      columns:
+        - name: PurchaseOrderID
+          description: 'Identificação única do pedido de compra.'
+        - name: PurchaseOrderDetailID
+          description: 'Identificação única do produto no pedido de compra.'
+        - name: DueDate
+          description: 'Data de entrega.'
+        - name: OrderQty
+          description: 'Quantidade do produto.'
+        - name: ProductID
+          description: 'Identificação única do produto.'
+        - name: UnitPrice
+          description: 'Preço unitário do produto.'
+        - name: LineTotal
+          description: 'Total da linha.'
+        - name: ReceivedQty
+          description: 'Quantidade recebida.'
+        - name: RejectedQty
+          description: 'Quantidade rejeitada.'
+        - name: StockedQty
+          description: 'Quantidade em estoque.'
+        - name: ModifiedDate
+          description: 'Data de modificação do pedido.'
+    
+    - name: shipmethod
+      description: 'Tabela contendo informações detalhadas sobre os métodos de envio.'
+      columns:
+        - name: ShipMethodID
+          description: 'Identificação única do método de envio.'
+        - name: Name
+          description: 'Nome do método de envio.'
+        - name: ShipBase
+          description: 'Valor base do frete.'
+        - name: ShipRate
+          description: 'Taxa de envio.'
+        - name: ModifiedDate
+          description: 'Data de modificação do método de envio.'
+       
