@@ -3,16 +3,12 @@ with
         select 
             -- Primary Key
             productid as productid_sk
-
             -- Foreign Key
             , productsubcategoryid as productsubcategory_fk
             , productmodelid as productmodel_fk
-
             -- Stitch Columns
             , name
             , productnumber
-            , makeflag
-            , finishedgoodsflag
             , color
             , safetystocklevel
             , reorderpoint
@@ -26,11 +22,10 @@ with
             , productline
             , class
             , style
-            , sellstartdate
-            , sellenddate
+            , cast(sellstartdate as timestamp) as sellstartdate
+            , cast(sellenddate as timestamp) as sellenddate
             , discontinueddate
             , modifieddate
-            
         from {{ source('adventure_works', 'product') }}
     )   
 

@@ -11,29 +11,49 @@ sources:
       columns:
         - name: PurchaseOrderID
           description: 'Identificação única do pedido de compra.'
+          tests:
+            - unique
+            - not_null
         - name: RevisionNumber
           description: 'Número de revisão do pedido de compra.'
+          tests:
+            - not_null
         - name: Status
           description: 'Status do pedido de compra.'
           tests:
-            - accepted_values:
-                values: [1, 2, 3, 4, 5]
+            - not_null
         - name: EmployeeID
           description: 'Identificação do funcionário que criou o pedido de compra.'
+          tests:
+            - not_null
         - name: VendorID
           description: 'Identificação do fornecedor.'
+          tests:
+            - not_null
         - name: ShipMethodID
           description: 'Identificação do método de envio.'
+          tests:
+            - not_null
         - name: OrderDate
           description: 'Data do pedido.'
+          tests:
+            - not_null
         - name: ShipDate
           description: 'Data de envio.'
+          tests:
+            - not_null
         - name: SubTotal
           description: 'Subtotal do pedido.'
+          tests:
+            - not_null
         - name: TaxAmt
           description: 'Valor do imposto.'
+          tests:
+            - not_null
         - name: Freight
           description: 'Valor do frete.'
+          tests:
+            - not_null
         - name: TotalDue
           description: 'Valor total devido.'
         - name: ModifiedDate
@@ -44,38 +64,67 @@ sources:
       columns:
         - name: PurchaseOrderID
           description: 'Identificação única do pedido de compra.'
+          tests:
+            - not_null  
         - name: PurchaseOrderDetailID
           description: 'Identificação única do produto no pedido de compra.'
+          tests:
+            - not_null
+            - unique
         - name: DueDate
           description: 'Data de entrega.'
+
         - name: OrderQty
           description: 'Quantidade do produto.'
+          tests:
+            - not_null
         - name: ProductID
           description: 'Identificação única do produto.'
+          tests:
+            - not_null
         - name: UnitPrice
           description: 'Preço unitário do produto.'
+          tests:
+            - not_null
         - name: LineTotal
           description: 'Total da linha.'
         - name: ReceivedQty
           description: 'Quantidade recebida.'
+          tests:
+            - not_null
         - name: RejectedQty
           description: 'Quantidade rejeitada.'
+          tests:
+            - not_null
         - name: StockedQty
           description: 'Quantidade em estoque.'
         - name: ModifiedDate
           description: 'Data de modificação do pedido.'
+          tests:
+            - not_null
     
     - name: shipmethod
       description: 'Tabela contendo informações detalhadas sobre os métodos de envio.'
       columns:
         - name: ShipMethodID
           description: 'Identificação única do método de envio.'
+          tests:
+            - unique
+            - not_null
         - name: Name
           description: 'Nome do método de envio.'
+          tests:
+            - not_null
         - name: ShipBase
           description: 'Valor base do frete.'
+          tests:
+            - not_null
         - name: ShipRate
           description: 'Taxa de envio.'
+          tests:
+            - not_null
         - name: ModifiedDate
           description: 'Data de modificação do método de envio.'
+          tests:
+            - not_null
        

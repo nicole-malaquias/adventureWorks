@@ -3,7 +3,6 @@ with
         select 
             -- Primary Key
             salesorderid as salesorder_pk
-
             -- Foreign Key
             , creditcardid as creditcard_pk
             , customerid as customer_pk
@@ -12,7 +11,6 @@ with
             , shiptoaddressid as shiptoaddress_pk
             , shipmethodid as shipmethod_pk
             , currencyrateid as currencyrate_pk
-
             -- Stich Columns
             , cast(orderdate as timestamp) as orderdate
             , cast(duedate as timestamp) as duedate

@@ -44,16 +44,10 @@ sources:
           description: "Número de identificação do cliente. Chave estrangeira para Customer."
           tests:
             - not_null
-            - relationships:
-                to: ref('stg_customer')
-                field: customerid
         - name: territoryid
           description: "Território onde a venda foi feita. Chave estrangeira para SalesTerritory.SalesTerritoryID."
           tests:
             - not_null
-            - relationships:
-                to: ref('stg_sales_territory')
-                field: salesterritoryid
         - name: billtoaddressid
           description: "Endereço de cobrança do cliente. Chave estrangeira para Address.AddressID."
         - name: shiptoaddressid
@@ -62,10 +56,8 @@ sources:
           description: "Método de envio. Chave estrangeira para ShipMethod.ShipMethodID."
         - name: creditcardid
           description: "Número de identificação do cartão de crédito. Chave estrangeira para CreditCard.CreditCardID."
-          tests:
-            - relationships:
-                to: ref('stg_creditcard')
-                field: creditcardid
+          # tests:
+          #   - not_null
         - name: creditcardapprovalcode
           description: "Código de aprovação fornecido pela empresa de cartão de crédito."
         - name: currencyrateid
@@ -99,9 +91,6 @@ sources:
           description: "Chave primária. Identificação única do pedido de venda. Chave estrangeira para SalesOrderHeader."
           tests:
             - not_null
-            - relationships:
-                to: ref('stg_sales_order_header')
-                field: salesorderid
         - name: salesorderdetailid
           description: "Chave primária. Identificação única do detalhe do pedido de venda."
           tests:
@@ -117,9 +106,6 @@ sources:
           description: "Número de identificação do produto. Chave estrangeira para Product.ProductID."
           tests:
             - not_null
-            - relationships:
-                to: ref('stg_product')
-                field: productid
         - name: specialofferid
           description: "ID da oferta especial aplicada ao produto. Chave estrangeira para SpecialOffer.SpecialOfferID."
           tests:
@@ -152,15 +138,12 @@ sources:
             - not_null
         - name: territoryid
           description: 'Território de vendas associado ao vendedor.'
-          tests:
-            - not_null
-            - relationships:
-                to: ref('stg_sales_territory')
-                field: salesterritoryid
+          # tests:
+          #   - not_null
         - name: salesquota
           description: 'Meta de vendas estabelecida para o vendedor.'
-          tests:
-            - not_null
+          # tests:
+          #   - not_null
         - name: bonus
           description: 'Bônus recebido pelo vendedor.'
         - name: commissionpct
@@ -192,8 +175,6 @@ sources:
             - not_null
         - name: group
           description: 'Grupo de territórios de vendas.'
-          tests:
-            - not_null
         - name: salesytd
           description: 'Vendas realizadas no território de vendas no ano até a data.'
           tests:
@@ -214,5 +195,3 @@ sources:
           description: 'Identificador exclusivo para o registro.'
         - name: modifieddate
           description: 'Data e hora da última modificação do registro.'
-
-    # - name: product

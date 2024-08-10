@@ -2,8 +2,7 @@ with
     source as (
         select 
             -- Primary Key
-            territoryid	as territory_pk
-            
+            territoryid	as territory_pk     
             -- Stitch Columns
             , name	
             , countryregioncode	
@@ -13,7 +12,6 @@ with
             , costytd
             , costlastyear	
             , modifieddate
-
         from {{ source('adventure_works', 'salesterritory') }}
     )
 

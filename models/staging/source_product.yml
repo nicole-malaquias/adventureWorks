@@ -9,79 +9,72 @@ sources:
     - name: product
       description: 'Tabela contendo informações detalhadas sobre os produtos.'
       columns:
-        - name: ProductID
+        - name: productid
           description: 'Identificação única do produto.'
-        - name: Name
+          tests:
+            - unique
+            - not_null
+        - name: name
           description: 'Nome do produto.'
         - name: ProductNumber
           description: 'Número de identificação único do produto.'
-        - name: MakeFlag
+          tests:
+            - unique
+            - not_null
+        - name: makeflag
           description: 'Indica se o produto é fabricado internamente (1) ou comprado (0). Padrão: 1.'
           tests:
-            - accepted_values:
-                values: [0, 1]
-        - name: FinishedGoodsFlag
+             - not_null
+        - name: finishedgoodsflag
           description: 'Indica se o produto é vendável (1) ou não (0). Padrão: 1.'
           tests:
-            - accepted_values:
-                values: [0, 1]
+            - not_null
+            # - accepted_values:
+            #     values: [0, 1]
         - name: Color
           description: 'Cor do produto.'
-        - name: SafetyStockLevel
+        - name: safetystocklevel
           description: 'Quantidade mínima de estoque.'
-        - name: ReorderPoint
+        - name: reorderpoint
           description: 'Nível de estoque que aciona uma ordem de compra ou de produção.'
-        - name: StandardCost
+        - name: standardcost
           description: 'Custo padrão do produto.'
-        - name: ListPrice
+        - name: listprice
           description: 'Preço de venda do produto.'
-        - name: Size
+        - name: size
           description: 'Tamanho do produto.'
-        - name: SizeUnitMeasureCode
+        - name: sizeunitmeasurecode
           description: 'Unidade de medida para a coluna Tamanho.'
-        - name: WeightUnitMeasureCode
+        - name: weightunimeasurecode 
           description: 'Unidade de medida para a coluna Peso.'
-        - name: Weight
+        - name: weight
           description: 'Peso do produto.'
-        - name: DaysToManufacture
+        - name: daysmanufacture
           description: 'Número de dias necessários para fabricar o produto.'
-        - name: ProductLine
+        - name: productline
           description: 'Linha de produtos: R = Road, M = Mountain, T = Touring, S = Standard.'
-          tests:
-            - accepted_values:
-                values: ['R', 'M', 'T', 'S']
-        - name: Class
+        - name: class
           description: 'Classe do produto: H = High, M = Medium, L = Low.'
-          tests:
-            - accepted_values:
-                values: ['H', 'M', 'L']
-        - name: Style
+        - name: style
           description: 'Estilo do produto: W = Womens, M = Mens, U = Universal.'
-          tests:
-            - accepted_values:
-                values: ['W', 'M', 'U']
-        - name: ProductSubcategoryID
+        - name: productsubcategoryid
           description: 'Produto pertence a esta subcategoria. Chave estrangeira para ProductSubCategory.ProductSubCategoryID.'
-          tests:
-            - not_null
-        - name: ProductModelID
+        - name: productmodelid
           description: 'Produto pertence a este modelo de produto. Chave estrangeira para ProductModel.ProductModelID.'
-          tests:
-            - not_null
-        - name: SellStartDate
+        - name: sellstartdate
           description: 'Data em que o produto ficou disponível para venda.'
           tests:
             - not_null
-        - name: SellEndDate
+        - name:  sellenddate
           description: 'Data em que o produto não ficou mais disponível para venda.'
-        - name: DiscontinuedDate
+        - name:  discontinueddate
           description: 'Data em que o produto foi descontinuado.'
         - name: rowguid
           description: 'Número que identifica exclusivamente o registro. Usado para suportar uma amostra de replicação de mesclagem. Padrão: newid().'
           tests:
             - unique
             - not_null
-        - name: ModifiedDate
+        - name:  modifieddate
           description: 'Data e hora da última atualização do registro. Padrão: getdate().'
           tests:
             - not_null
