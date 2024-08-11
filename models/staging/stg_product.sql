@@ -2,7 +2,7 @@ with
     source as (
         select 
             -- Primary Key
-            productid as productid_sk
+            productid as product_pk
             -- Foreign Key
             , productsubcategoryid as productsubcategory_fk
             , productmodelid as productmodel_fk

@@ -116,3 +116,19 @@ sources:
           description: 'Data e hora da última atualização do registro. Padrão: getdate().'
           tests:
             - not_null
+
+    - name: productsubcategory
+      columns:
+        - name: productsubcategoryid
+          description: 'Identificação única da subcategoria de produto.'
+          tests:
+            - unique
+            - not_null
+        - name: productcategoryid
+          description: 'Identificação única da categoria de produto.'
+          tests:
+            - not_null
+        - name: name  
+          description: 'Nome da subcategoria de produto.'
+          tests:
+            - not_null

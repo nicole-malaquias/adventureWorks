@@ -2,7 +2,7 @@ with
     source as (
         select 
             -- Primary key
-            productcategoryid as productcategoryid_sk
+            productcategoryid as productcategory_pk
             -- Stich Columns
             , name
             , modifieddate

@@ -4,13 +4,13 @@ with
             -- Primary Key
             salesorderid as salesorder_pk
             -- Foreign Key
-            , creditcardid as creditcard_pk
-            , customerid as customer_pk
-            , territoryid as territory_pk
-            , billtoaddressid as billtoaddress_pk
-            , shiptoaddressid as shiptoaddress_pk
-            , shipmethodid as shipmethod_pk
-            , currencyrateid as currencyrate_pk
+            , creditcardid as creditcard_fk
+            , customerid as customer_fk
+            , territoryid as territory_fk
+            , billtoaddressid as billtoaddress_fk
+            , shiptoaddressid as shiptoaddress_fk
+            , shipmethodid as shipmethod_fk
+            , currencyrateid as currencyrate_fk
             -- Stich Columns
             , cast(orderdate as timestamp) as orderdate
             , cast(duedate as timestamp) as duedate
