@@ -1,0 +1,118 @@
+version: 2
+
+sources:
+  - name: adventure_works 
+    database: adventure-works-431420 
+    schema: raw_sap
+    tables:
+    
+    - name: product
+      description: 'Tabela contendo informações detalhadas sobre os produtos.'
+      columns:
+        - name: productid
+          description: 'Identificação única do produto.'
+          tests:
+            - unique
+            - not_null
+        - name: name
+          description: 'Nome do produto.'
+        - name: ProductNumber
+          description: 'Número de identificação único do produto.'
+          tests:
+            - unique
+            - not_null
+        - name: makeflag
+          description: 'Indica se o produto é fabricado internamente (1) ou comprado (0). Padrão: 1.'
+          tests:
+             - not_null
+        - name: finishedgoodsflag
+          description: 'Indica se o produto é vendável (1) ou não (0). Padrão: 1.'
+          tests:
+            - not_null
+            # - accepted_values:
+            #     values: [0, 1]
+        - name: Color
+          description: 'Cor do produto.'
+        - name: safetystocklevel
+          description: 'Quantidade mínima de estoque.'
+        - name: reorderpoint
+          description: 'Nível de estoque que aciona uma ordem de compra ou de produção.'
+        - name: standardcost
+          description: 'Custo padrão do produto.'
+        - name: listprice
+          description: 'Preço de venda do produto.'
+        - name: size
+          description: 'Tamanho do produto.'
+        - name: sizeunitmeasurecode
+          description: 'Unidade de medida para a coluna Tamanho.'
+        - name: weightunimeasurecode 
+          description: 'Unidade de medida para a coluna Peso.'
+        - name: weight
+          description: 'Peso do produto.'
+        - name: daysmanufacture
+          description: 'Número de dias necessários para fabricar o produto.'
+        - name: productline
+          description: 'Linha de produtos: R = Road, M = Mountain, T = Touring, S = Standard.'
+        - name: class
+          description: 'Classe do produto: H = High, M = Medium, L = Low.'
+        - name: style
+          description: 'Estilo do produto: W = Womens, M = Mens, U = Universal.'
+        - name: productsubcategoryid
+          description: 'Produto pertence a esta subcategoria. Chave estrangeira para ProductSubCategory.ProductSubCategoryID.'
+        - name: productmodelid
+          description: 'Produto pertence a este modelo de produto. Chave estrangeira para ProductModel.ProductModelID.'
+        - name: sellstartdate
+          description: 'Data em que o produto ficou disponível para venda.'
+          tests:
+            - not_null
+        - name:  sellenddate
+          description: 'Data em que o produto não ficou mais disponível para venda.'
+        - name:  discontinueddate
+          description: 'Data em que o produto foi descontinuado.'
+        - name: rowguid
+          description: 'Número que identifica exclusivamente o registro. Usado para suportar uma amostra de replicação de mesclagem. Padrão: newid().'
+          tests:
+            - unique
+            - not_null
+        - name:  modifieddate
+          description: 'Data e hora da última atualização do registro. Padrão: getdate().'
+          tests:
+            - not_null
+    
+    - name: productcategory
+      columns:
+        - name: ProductCategoryID
+          description: 'Identificação única da categoria de produto.'
+        - name: Name
+          description: 'Nome da categoria de produto.'
+        - name: rowguid
+          description: 'Número que identifica exclusivamente o registro. Usado para suportar uma amostra de replicação de mesclagem. P Padrão: newid().'
+          tests:
+            - unique
+            - not_null
+        - name: ModifiedDate
+          description: 'Data e hora da última atualização do registro. Padrão: getdate().'
+          tests:
+            - not_null
+    
+    - name: productinventory
+      columns:
+        - name: ProductID
+          description: 'Identificação única do produto.'
+        - name: LocationID
+          description: 'Identificação única da localização onde o inventário está armazenado.'
+        - name: Shelf
+          description: 'Localização no armazém.'
+        - name: Bin
+          description: 'Número do compartimento no armazém.'
+        - name: Quantity
+          description: 'Quantidade de produtos armazenados no inventário.'
+        - name: rowguid
+          description: 'Número que identifica exclusivamente o registro. Usado para suportar uma amostra de replicação de mesclagem. Padrão: newid().'
+          tests:
+            - unique
+            - not_null
+        - name: ModifiedDate
+          description: 'Data e hora da última atualização do registro. Padrão: getdate().'
+          tests:
+            - not_null

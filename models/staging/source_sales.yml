@@ -1,0 +1,197 @@
+version: 2
+
+sources:
+  - name: adventure_works 
+    database: adventure-works-431420 
+    schema: raw_sap
+    tables:
+
+    - name: salesorderheader
+      description: "Tabela que armazena os cabeçalhos dos pedidos de venda."
+      columns:
+        - name: salesorderid
+          description: "Chave primária. Identificação única do pedido de venda."
+          tests:
+            - unique
+            - not_null
+        - name: revisionnumber
+          description: "Número incremental para rastrear alterações no pedido de venda ao longo do tempo. Padrão: 0"
+          tests:
+            - not_null
+        - name: orderdate
+          description: "Data em que o pedido de venda foi criado. Padrão: getdate()"
+          tests:
+            - not_null
+        - name: duedate
+          description: "Data de vencimento do pedido para o cliente."
+          tests:
+            - not_null
+        - name: shipdate
+          description: "Data de envio do pedido para o cliente."
+          tests:
+            - not_null
+        - name: status
+          description: "Status atual do pedido. 1 = Em processo; 2 = Aprovado; 3 = Em espera; 4 = Rejeitado; 5 = Enviado; 6 = Cancelado. Padrão: 1"
+          tests:
+            - not_null
+        - name: onlineorderflag
+          description: "0 = Pedido feito por vendedor. 1 = Pedido feito online pelo cliente. Padrão: 1"
+          tests:
+            - not_null
+        - name: accountnumber
+          description: "Número de referência contábil."
+        - name: customerid
+          description: "Número de identificação do cliente. Chave estrangeira para Customer."
+          tests:
+            - not_null
+        - name: territoryid
+          description: "Território onde a venda foi feita. Chave estrangeira para SalesTerritory.SalesTerritoryID."
+          tests:
+            - not_null
+        - name: billtoaddressid
+          description: "Endereço de cobrança do cliente. Chave estrangeira para Address.AddressID."
+        - name: shiptoaddressid
+          description: "Endereço de envio do cliente. Chave estrangeira para Address.AddressID."
+        - name: shipmethodid
+          description: "Método de envio. Chave estrangeira para ShipMethod.ShipMethodID."
+        - name: creditcardid
+          description: "Número de identificação do cartão de crédito. Chave estrangeira para CreditCard.CreditCardID."
+          # tests:
+          #   - not_null
+        - name: creditcardapprovalcode
+          description: "Código de aprovação fornecido pela empresa de cartão de crédito."
+        - name: currencyrateid
+          description: "Taxa de câmbio utilizada. Chave estrangeira para CurrencyRate.CurrencyRateID."
+        - name: subtotal
+          description: "Subtotal das vendas. Calculado como SUM(SalesOrderDetail.LineTotal) para o SalesOrderID apropriado. Padrão: 0.00"
+        - name: taxamt
+          description: "Valor do imposto. Padrão: 0.00"
+        - name: freight
+          description: "Custo de envio. Padrão: 0.00"
+        - name: totaldue
+          description: "Total devido pelo cliente. Calculado como Subtotal + TaxAmt + Freight."
+          tests:
+            - not_null
+        - name: comment
+          description: "Comentários do representante de vendas."
+        - name: rowguid
+          description: "Número que identifica exclusivamente o registro. Usado para suportar uma amostra de replicação de mesclagem. Padrão: newid()"
+          tests:
+            - unique
+            - not_null
+        - name: modifieddate
+          description: "Data e hora da última atualização do registro. Padrão: getdate()"
+          tests:
+            - not_null
+    
+    - name: salesorderdetail
+      description: "Tabela que armazena os detalhes dos pedidos de venda."
+      columns:
+        - name: salesorderid
+          description: "Chave primária. Identificação única do pedido de venda. Chave estrangeira para SalesOrderHeader."
+          tests:
+            - not_null
+        - name: salesorderdetailid
+          description: "Chave primária. Identificação única do detalhe do pedido de venda."
+          tests:
+            - unique
+            - not_null
+        - name: carriertrackingnumber
+          description: "Número de rastreamento da transportadora."
+        - name: orderqty
+          description: "Quantidade de produtos vendidos por linha de pedido."
+          tests:
+            - not_null
+        - name: productid
+          description: "Número de identificação do produto. Chave estrangeira para Product.ProductID."
+          tests:
+            - not_null
+        - name: specialofferid
+          description: "ID da oferta especial aplicada ao produto. Chave estrangeira para SpecialOffer.SpecialOfferID."
+          tests:
+            - not_null
+        - name: unitprice
+          description: "Preço unitário do produto."
+          tests:
+            - not_null
+        - name: unitpricediscount
+          description: "Desconto aplicado ao preço unitário. Padrão: 0.0"
+          tests:
+            - not_null
+        - name: rowguid
+          description: "Número que identifica exclusivamente o registro. Usado para suportar uma amostra de replicação de mesclagem. P Padrão: newid()"
+          tests:
+            - unique
+            - not_null
+        - name: modifieddate
+          description: "Data e hora da última atualização do registro. Padrão: getdate()"
+          tests:
+            - not_null
+    
+    - name: salesperson
+      description: "Tabela que armazena informações sobre os vendedores." 
+      columns:
+        - name: businessentityid
+          description: 'Chave primária. Identificação única do vendedor.'
+          tests:
+            - unique
+            - not_null
+        - name: territoryid
+          description: 'Território de vendas associado ao vendedor.'
+          # tests:
+          #   - not_null
+        - name: salesquota
+          description: 'Meta de vendas estabelecida para o vendedor.'
+          # tests:
+          #   - not_null
+        - name: bonus
+          description: 'Bônus recebido pelo vendedor.'
+        - name: commissionpct
+          description: 'Percentual de comissão do vendedor.'
+        - name: salesytd
+          description: 'Vendas realizadas pelo vendedor no ano até a data.'
+        - name: saleslastyear
+          description: 'Vendas realizadas pelo vendedor no ano anterior.'
+        - name: rowguid
+          description: 'Identificador exclusivo para o registro.'
+        - name: modifieddate
+          description: 'Data e hora da última modificação do registro.'
+
+    - name: salesterritory
+      description: "Tabela que armazena informações sobre os territórios de vendas."
+      columns:
+        - name: territoryid
+          description: 'Chave primária. Identificação única do território de vendas.'
+          tests:
+            - unique
+            - not_null
+        - name: name
+          description: 'Nome do território de vendas.'
+          tests:
+            - not_null
+        - name: countryregioncode
+          description: 'Código de região do país.'
+          tests:
+            - not_null
+        - name: group
+          description: 'Grupo de territórios de vendas.'
+        - name: salesytd
+          description: 'Vendas realizadas no território de vendas no ano até a data.'
+          tests:
+            - not_null
+        - name: saleslastyear
+          description: 'Vendas realizadas no território de vendas no ano anterior.'
+          tests:
+            - not_null
+        - name: costytd
+          description: 'Custo acumulado no território de vendas no ano até a data.'
+          tests:
+            - not_null
+        - name: costlastyear
+          description: 'Custo acumulado no território de vendas no ano anterior.'
+          tests:
+            - not_null
+        - name: rowguid
+          description: 'Identificador exclusivo para o registro.'
+        - name: modifieddate
+          description: 'Data e hora da última modificação do registro.'
