@@ -1,52 +1,51 @@
-
-
-WITH
-    date_array AS (
-        SELECT
-            date_add(DATE('2011-01-01'), INTERVAL day_number DAY) AS `date`
-        FROM
-            UNNEST(GENERATE_ARRAY(0, DATE_DIFF(DATE('2014-01-01'), DATE('2011-01-01'), DAY))) AS day_number
-    ),
-    date_dimension AS (
-        SELECT
-            `date`,
-            EXTRACT(YEAR FROM `date`) AS year,
-            EXTRACT(MONTH FROM `date`) AS month,
-            EXTRACT(DAY FROM `date`) AS day_of_month,
-            EXTRACT(DAYOFWEEK FROM `date`) AS day_of_week,
-            CASE
-                WHEN EXTRACT(DAYOFWEEK FROM `date`) IN (6, 7, 1) THEN
-                    EXTRACT(WEEK FROM `date`)
-                ELSE
-                    EXTRACT(WEEK FROM DATE_SUB(`date`, INTERVAL 3 DAY))
-            END AS initial_week_num
-        FROM date_array
-    ),
-    year_week AS (
-        SELECT
-            *,
-            CASE
-                WHEN initial_week_num = 1 AND EXTRACT(MONTH FROM `date`) = 12 THEN initial_week_num
-                WHEN initial_week_num >= 52 AND EXTRACT(MONTH FROM `date`) = 1 THEN initial_week_num
-                ELSE initial_week_num
-            END AS adjusted_week_num,
-            CASE
-                WHEN initial_week_num = 1 AND EXTRACT(MONTH FROM `date`) = 12 THEN year + 1
-                WHEN initial_week_num >= 52 AND EXTRACT(MONTH FROM `date`) = 1 THEN year - 1
-                ELSE year
-            END AS adjusted_year
-        FROM date_dimension
+with
+    date_array as (
+        select
+            date_add(date('2011-01-01'), interval day_number day) as `date`
+        from
+            unnest(generate_array(0, date_diff(date('2014-01-01'), date('2011-01-01'), day))) as day_number
     )
-    , week_in_month AS (
-        SELECT
-            *,
-            CASE
-                WHEN EXTRACT(DAYOFWEEK FROM `date`) IN (6, 7, 1) THEN CEIL(EXTRACT(DAY FROM `date`) / 7.0)
-                ELSE CEIL((EXTRACT(DAY FROM `date`) - EXTRACT(DAYOFWEEK FROM `date`) + 5) / 7.0)
-            END AS week_num_in_month
-        FROM year_week
+    
+    , date_dimension as (
+        select
+            `date`
+            , extract(year from `date`) as year
+            , extract(month from `date`) as month
+            , extract(day from `date`) as day_of_month
+            , extract(dayofweek from `date`) as day_of_week
+            , case
+                when extract(dayofweek from `date`) in (6, 7, 1) then
+                    extract(week from `date`)
+                else
+                    extract(week from date_sub(`date`, interval 3 day))
+            end as initial_week_num
+        from date_array
+    )
+
+    , year_week as (
+        select *
+            , case
+                when initial_week_num = 1 and extract(month from `date`) = 12 then initial_week_num
+                when initial_week_num >= 52 and extract(month from `date`) = 1 then initial_week_num
+                else initial_week_num
+            end as adjusted_week_num
+            , case
+                when initial_week_num = 1 and extract(month from `date`) = 12 then year + 1
+                when initial_week_num >= 52 and extract(month from `date`) = 1 then year - 1
+                else year
+            end as adjusted_year
+        from date_dimension
+    )
+
+    , week_in_month as (
+        select *
+            , case
+                when extract(dayofweek from `date`) in (6, 7, 1) then ceil(extract(day from `date`) / 7.0)
+                else ceil((extract(day from `date`) - extract(dayofweek from `date`) + 5) / 7.0)
+            end as week_num_in_month
+        from year_week
     )
 
 select 
     *
-from year_week
+from year_week;

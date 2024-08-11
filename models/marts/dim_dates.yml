@@ -1,30 +1,41 @@
+version: 2
+
 models:
-  
-  - name: dim_dates
-    description: Date dimension table. Here you can identify all calendar information such as days, weeks, months, quarters and years. There is 1 line for each day.
-    columns: 
-       - name: date
-         description: Primary key of the table. Corresponds to the date of the event. Field used to create relationships with fact tables.
-         tests:
-           - unique
-           - not_null
-    #   - name: year
-    #     description: Range between 2022 and 2024
-    #   - name: month
-    #     description: Range between 1 and 12
-    #   - name: day_of_month
-    #     description: Numeric value to represent the day of the month (range between 1 and 31)
-    #   - name: day_of_week
-    #     description: Numeric value to represent the day of the week (range between 1 and 7)
-    #   - name: initial_week_num
-    #     description: Data Starting day of the week
-    #   - name: adjusted_week_num
-    #     description: week
-    #   - name: adjusted_year
-    #     description: year
-    #   - name: week_num_in_month
-    #     description: Represents the number of the week in the month. So, 1 represents the first week, 2 represents the second week and so on.
-    #   - name: year_week_starting_thursday
-    #     description: Start date of the week, in this column the weeks always start on Thursdays
-      # - name: is_holiday
-      #   description: 1 if it is a holiday and 0 if it is not a holiday
+  - name: dim_date
+    description: >
+      This model creates a date dimension table containing various date-related fields such as year, month, day of the month, day of the week, initial week number, adjusted week number, adjusted year, and the week number within the month. This table can be used to join with fact tables to analyze data over different time periods.
+
+    columns:
+      - name: date
+        description: "The primary key for the date dimension. Represents the specific date."
+        tests:
+          - unique
+          - not_null
+
+      - name: year
+        description: "The year extracted from the date."
+
+      - name: month
+        description: "The month extracted from the date."
+
+      - name: day_of_month
+        description: "The day of the month extracted from the date."
+
+      - name: day_of_week
+        description: "The day of the week extracted from the date, where 1 represents Sunday and 7 represents Saturday."
+
+      - name: initial_week_num
+        description: >
+          The initial week number of the year extracted from the date. Adjustments are made for dates that belong to a different year based on the week number.
+
+      - name: adjusted_week_num
+        description: >
+          The adjusted week number considering edge cases like dates that fall in December but belong to the first week of the following year, or dates in January that belong to the last week of the previous year.
+
+      - name: adjusted_year
+        description: >
+          The adjusted year considering the same edge cases as for adjusted week number.
+
+      - name: week_num_in_month
+        description: >
+          The week number within the month calculated based on the day of the week and day of the month.
