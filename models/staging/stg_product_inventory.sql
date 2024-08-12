@@ -4,7 +4,7 @@ with
             -- Foreign Key
              productid as product_fk
             , locationid as location_fk
-            -- Stich Columns
+            -- Others Columns
             , shelf
             , bin
             , quantity

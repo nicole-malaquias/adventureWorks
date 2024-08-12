@@ -3,7 +3,7 @@ with
         select 
             -- Primary key
             productcategoryid as productcategory_pk
-            -- Stich Columns
+            -- Others Columns
             , name
             , modifieddate
         from {{ source('adventure_works', 'productcategory') }}

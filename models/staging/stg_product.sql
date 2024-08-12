@@ -6,7 +6,7 @@ with
             -- Foreign Key
             , productsubcategoryid as productsubcategory_fk
             , productmodelid as productmodel_fk
-            -- Stitch Columns
+            -- Others Columns
             , name
             , productnumber
             , color

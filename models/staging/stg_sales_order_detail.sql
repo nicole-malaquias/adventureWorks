@@ -7,7 +7,7 @@ with
             , salesorderid as salesorder_fk
             , productid as product_fk
             , specialofferid as specialoffer_fk
-            -- Stich Columns
+            -- Others Columns
             , carriertrackingnumber
             , orderqty
             , unitprice

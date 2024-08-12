@@ -7,11 +7,12 @@ with
             , creditcardid as creditcard_fk
             , customerid as customer_fk
             , territoryid as territory_fk
+            , salespersonid as salesperson_fk
             , billtoaddressid as billtoaddress_fk
             , shiptoaddressid as shiptoaddress_fk
             , shipmethodid as shipmethod_fk
             , currencyrateid as currencyrate_fk
-            -- Stich Columns
+            -- Others Columns
             , cast(orderdate as timestamp) as orderdate
             , cast(duedate as timestamp) as duedate
             , cast(shipdate as timestamp) as shipdate

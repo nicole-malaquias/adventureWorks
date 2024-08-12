@@ -5,8 +5,8 @@ with
             productsubcategoryid as productsubcategory_pk
             -- Foreign key
             ,productcategoryid as productcategory_fk
-            -- Stitch Columns
-            ,name
+            -- Others Columns
+            , name
         from {{ source('adventure_works', 'productsubcategory') }}
     )   
     

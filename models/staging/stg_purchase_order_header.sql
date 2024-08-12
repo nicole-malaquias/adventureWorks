@@ -4,10 +4,8 @@ with
             -- Primary Key
             purchaseorderid as purchaseorder_pk
             -- Foreign Keys
-            , employeeid as employee_fk
-            , vendorid as vendor_fk
             , shipmethodid as shipmethod_fk
-            -- Stich Columns
+            -- Others Columns
             , revisionnumber
             , status
             , cast(orderdate as timestamp) as orderdate
@@ -15,7 +13,6 @@ with
             , subtotal
             , taxamt
             , freight
-            , modifieddate
         from {{ source('adventure_works', 'purchaseorderheader') }}
     )
 

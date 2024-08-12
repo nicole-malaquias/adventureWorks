@@ -3,7 +3,7 @@ with
         select 
             -- Primary Key
             territoryid	as territory_pk     
-            -- Stitch Columns
+            -- Other Columns
             , name	
             , countryregioncode	
             , `group` as group_territory

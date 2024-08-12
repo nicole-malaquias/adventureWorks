@@ -3,7 +3,7 @@ with
         select
             -- Primary key
             shipmethodid as shipmethod_pk
-            -- Stich Columns
+            -- Others Columns
             , name
             , shipbase
             , shiprate
