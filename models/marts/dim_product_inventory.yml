@@ -1,0 +1,19 @@
+version: 2
+
+models:
+
+  - name: dim_product_inventory 
+    description: >
+      Este modelo cria uma tabela de dimensão de inventário de produto contendo vários campos, como ID do inventário de produto, nome do inventário de produto e descrição do inventário de produto. Esta tabela pode ser usada para juntar com tabelas de fatos e analisar dados com base em inventários de produtos.
+    columns:
+      - name: inventory_sk
+        description: "A chave primária da dimensão inventário de produto. Representa o identificador único para o inventário de produto."
+        tests:
+          - unique
+          - not_null
+      - name: location_fk
+        # tests:
+        #   - not_null
+        #   - relationships:
+        #       to: ref('dim_product_location')
+        #       field: location_pk
