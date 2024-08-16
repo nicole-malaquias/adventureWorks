@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: shipmethod_dimension
+    description: "Tabela de dimensão que armazena informações sobre os métodos de envio, incluindo nome, base de envio e taxa de envio."
+    columns:
+      - name: ship_method_sk
+        description: "Chave primária gerada para identificar unicamente um método de envio."
+        tests:
+          - unique
+          - not_null
+
+      - name: name
+        description: "Nome do método de envio."
+        tests:
+          - not_null
+
+      - name: shipbase
+        description: "Valor base do envio."
+        tests:
+          - not_null
+
+      - name: shiprate
+        description: "Taxa de envio."
+        tests:
+          - not_null
