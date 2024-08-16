@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: dim_person
+    description: "Tabela de dimensão contendo informações das pessoas."
+    columns:
+      - name: person_pk
+        description: "Chave primária gerada para identificar unicamente uma pessoa."
+        tests:
+          - unique
+          - not_null
+
+      - name: title
+        description: "Título da pessoa (ex: Sr, Sra, Dr)."
+      
+      - name: firstname
+        description: "Primeiro nome da pessoa."
+        tests:
+          - not_null
+
+      - name: middlename
+        description: "Nome do meio da pessoa (opcional)."
+      
+      - name: lastname
+        description: "Sobrenome da pessoa."
+        tests:
+          - not_null
+
+      - name: persontype_description
+        description: "Descrição do tipo de pessoa (ex: funcionário, cliente)."
+        tests:
+          - not_null
+
+      - name: namestyle_description
+        description: "Estilo do nome da pessoa (ex: formal, informal)."
+
+      - name: suffix
+        description: "Sufixo do nome da pessoa (ex: Jr, Sr)."
+
+      - name: emailpromotion
+        description: "Indicador de participação em promoções por e-mail."
