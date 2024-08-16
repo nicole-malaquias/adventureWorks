@@ -1,0 +1,122 @@
+version: 2
+
+sources:
+  - name: adventure_works
+  - name: adventure_works 
+    database: adventure-works-431420 
+    schema: raw_sap 
+
+    tables:
+      - name: address
+        description: "Contém informações sobre endereços"
+        columns:
+          - name: addressid
+            description: "Chave primária"
+            tests:
+              - unique
+              - not_null
+          - name: stateprovinceid
+            description: "Chave estrangeira para a tabela stateprovince"
+            tests:
+              - not_null
+          - name: city
+            description: "Cidade do endereço"
+            tests:
+              - not_null
+          - name: addressline1
+            description: "Primeira linha do endereço"
+            tests:
+              - not_null
+          - name: addressline2
+            description: "Segunda linha do endereço (opcional)"
+          - name: postalcode
+            description: "Código postal do endereço"
+            tests:
+              - not_null
+          - name: spatiallocation
+            description: "Localização espacial do endereço"
+
+      - name: stateprovince
+        description: "Contém informações sobre estados e províncias"
+        columns:
+          - name: stateprovinceid
+            description: "Chave primária"
+            tests:
+              - unique
+              - not_null
+          - name: countryregioncode
+            description: "Código da região ou país"
+            tests:
+              - not_null
+          - name: modifieddate
+            description: "Data de modificação"
+            tests:
+              - not_null
+          - name: rowguid
+            description: "GUID de linha"
+            tests:
+              - unique
+          - name: name
+            description: "Nome do estado ou província"
+            tests:
+              - not_null
+          - name: territoryid
+            description: "Identificador do território"
+          - name: isonlystateprovinceflag
+            description: "Flag indicando se é a única província do estado"
+          - name: stateprovincecode
+            description: "Código do estado ou província"
+            tests:
+              - not_null
+
+      - name: person
+        description: "Contém informações sobre pessoas"
+        columns:
+          - name: businessentityid
+            description: "Chave primária"
+            tests:
+              - unique
+              - not_null
+          - name: title
+            description: "Título da pessoa"
+          - name: firstname
+            description: "Primeiro nome"
+            tests:
+              - not_null
+          - name: middlename
+            description: "Nome do meio"
+          - name: lastname
+            description: "Último nome"
+            tests:
+              - not_null
+          - name: persontype
+            description: "Tipo de pessoa"
+            tests:
+              - not_null
+          - name: namestyle
+            description: "Estilo de nome"
+          - name: suffix
+            description: "Sufixo"
+          - name: modifieddate
+            description: "Data de modificação"
+            tests:
+              - not_null
+          - name: rowguid
+            description: "GUID de linha"
+            tests:
+              - unique
+          - name: emailpromotion
+            description: "Promoção por e-mail"
+
+      - name: countryregion
+        description: "Contém informações sobre códigos de região ou país"
+        columns:
+          - name: countryregioncode
+            description: "Código da região ou país"
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: "Nome do país ou região"
+            tests:
+              - not_null

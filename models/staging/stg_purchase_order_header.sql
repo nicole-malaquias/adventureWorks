@@ -13,6 +13,7 @@ with
             , subtotal
             , taxamt
             , freight
+            , subtotal + taxamt + freight as totaldue
         from {{ source('adventure_works', 'purchaseorderheader') }}
     )
 

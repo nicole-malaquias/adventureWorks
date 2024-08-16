@@ -195,3 +195,7 @@ sources:
           description: 'Identificador exclusivo para o registro.'
         - name: modifieddate
           description: 'Data e hora da última modificação do registro.'
+    - name: customer
+    - name: store
+    - name: salesorderheadersalesreason
+    - name: salesreason
