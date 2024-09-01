@@ -26,7 +26,7 @@ with
             
             -- Foreign keys
             , {{ dbt_utils.surrogate_key(['stg_person.person_pk']) }} as person_fk
-            , {{ dbt_utils.surrogate_key(['stg_store.store_pk']) }} as store_fk
+            , COALESCE(stg_store.name, 'Online Store') as store_name
             , {{ dbt_utils.surrogate_key(['stg_territory.territory_pk']) }} as territory_fk
             
         from stg_customer

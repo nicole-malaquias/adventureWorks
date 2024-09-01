@@ -1,14 +1,14 @@
 with source as (
     select 
-        -- Primary Key
+        -- primary key
         territoryid as territory_pk
-        -- Other Columns
-        , name
-        , countryregioncode
+        -- other columns
         , case 
-            when countryregioncode = 'US' then concat('US ', `group`)
-            else `group`
-        end as group_territory
+            when countryregioncode = 'US' then concat('USA ', name)
+            else name
+        end as name
+        , countryregioncode
+        , `group` as group_territory
         , saleslastyear
         , costytd
         , costlastyear	
@@ -16,5 +16,15 @@ with source as (
     from {{ source('adventure_works', 'salesterritory') }}
 )
 
+, country_name_cte as (
+    select 
+        *
+        , case 
+            when left(name, 3) = 'USA' then 'United States'
+            else name
+        end as country_name
+    from source
+)
+
 select *
-from source
+from country_name_cte

@@ -32,7 +32,7 @@ with
             , stg_detail.unit_price
             , stg_detail.received_qty
             , stg_detail.rejected_qty
-            , stg_order.status
+            , stg_order.pur_status
             , stg_order.orderdate
             , stg_order.shipdate
             , stg_order.subtotal
@@ -46,6 +46,7 @@ with
         on stg_detail.product_fk = stg_product.product_pk
         left join stg_shipmethod
         on stg_order.shipmethod_fk = stg_shipmethod.shipmethod_pk
+        where stg_order.pur_status = 'complete'
     )
 
 select *    

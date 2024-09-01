@@ -10,6 +10,7 @@ with
             {{ dbt_utils.surrogate_key(['territory_pk']) }} as territory_pk
             -- Other Columns
             , name
+            , country_name
             , countryregioncode
             , group_territory
             , saleslastyear

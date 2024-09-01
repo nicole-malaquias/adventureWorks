@@ -1,54 +1,57 @@
+-- CTEs (Common Table Expressions)
 with 
     detail_cte as (
         select *
         from {{ ref('stg_sales_order_detail') }}
-    )
+    ),
 
-    , order_cte as (
+    order_cte as (
         select *
         from {{ ref('stg_sales_order_header') }}
-    )
+    ),
 
-    , product_cte as (
+    product_cte as (
         select *
         from {{ ref('stg_product') }}
-    )
+    ),
 
-    , customer_cte as (
+    customer_cte as (
         select *
         from {{ ref('stg_sales_customer') }}
-    )
+    ),
 
-    , person_cte as (
+    person_cte as (
         select *
         from {{ ref('stg_sales_person') }}
-    )
+    ),
 
-    , territory_cte as (
+    territory_cte as (
         select *
         from {{ ref('stg_sales_territory') }}
-    )
+    ),
 
-    , shipmethod_cte as (
+    shipmethod_cte as (
         select *
         from {{ ref('stg_purchase_ship_method') }}
-    )
+    ),
 
-    , addrees_cte as (
+    addrees_cte as (
         select *
         from {{ ref('stg_person_address') }}
-    )
+    ),
 
-    , reason_sales as (
+    reason_sales_cte as (
         select *
         from {{ ref('stg_sales_order_header_reason') }}
-    )
+    ),
 
-    , complete_sales_order as (
+    -- Principal table that joins all CTEs
+    complete_sales_order as (
         select 
             -- Primary Key
             {{ dbt_utils.surrogate_key(['detail_cte.salesorderdetail_pk']) }} as salesorderdetail_pk
-            -- Foreign Keys
+            
+            -- Foreign Keys 
             , {{ dbt_utils.surrogate_key(['order_cte.salesorder_pk']) }} as salesorder_fk
             , {{ dbt_utils.surrogate_key(['product_cte.product_pk']) }} as product_fk
             , {{ dbt_utils.surrogate_key(['person_cte.salesperson_pk']) }} as sales_person_fk
@@ -56,7 +59,7 @@ with
             , {{ dbt_utils.surrogate_key(['territory_cte.territory_pk']) }} as territory_fk
             , {{ dbt_utils.surrogate_key(['shipmethod_cte.shipmethod_pk']) }} as shipmethod_fk
             , {{ dbt_utils.surrogate_key(['addrees_cte.address_pk']) }} as address_fk
-            , {{ dbt_utils.surrogate_key(['reason_sales.order_reason_pk']) }} as  order_header_reason_fk
+
             -- Other Fields
             , detail_cte.carriertrackingnumber
             , order_cte.orderdate
@@ -71,6 +74,7 @@ with
             , detail_cte.unitprice
             , detail_cte.unitpricediscount
             , detail_cte.modifieddate
+
         from detail_cte 
         left join order_cte 
         on detail_cte.salesorder_fk = order_cte.salesorder_pk
@@ -86,11 +90,7 @@ with
         on order_cte.shipmethod_fk = shipmethod_cte.shipmethod_pk
         left join addrees_cte 
         on order_cte.billtoaddress_fk = addrees_cte.address_pk
-        left join reason_sales 
-        on order_cte.salesorder_pk = reason_sales.order_head_fk
     )
 
 select *
 from complete_sales_order
-
---  Name order_head_pk not found inside reason_sales at [96:58]
