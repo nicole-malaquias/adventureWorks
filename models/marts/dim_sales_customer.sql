@@ -23,12 +23,11 @@ with
         select 
             -- Primary key (use relevant columns to generate a unique key)
             {{ dbt_utils.surrogate_key(['customer_pk']) }} as customer_pk
-            
             -- Foreign keys
             , {{ dbt_utils.surrogate_key(['stg_person.person_pk']) }} as person_fk
-            , COALESCE(stg_store.name, 'Online Store') as store_name
             , {{ dbt_utils.surrogate_key(['stg_territory.territory_pk']) }} as territory_fk
-            
+            -- Other columns
+            , coalesce(stg_store.name, 'Online Store') as store_name
         from stg_customer
         left join stg_person
             on stg_customer.person_fk = stg_person.person_pk

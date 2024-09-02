@@ -2,7 +2,7 @@ with
     person as (
         select
             -- Primary key
-            {{ dbt_utils.surrogate_key(['person_pk']) }} as person_pk
+            {{ dbt_utils.surrogate_key(['person_pk','full_name']) }} as person_sk
             -- Others Columns
             , full_name
             , title

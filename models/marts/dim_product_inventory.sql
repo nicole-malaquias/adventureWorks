@@ -12,8 +12,10 @@ with
 
     , product_inventory_mapping as (
         select 
+            -- Primary key
             {{ dbt_utils.surrogate_key(['product.product_pk', 'inventory.location_fk']) }} as inventory_sk
-            , {{ dbt_utils.surrogate_key(['product.product_pk']) }} as product_fk
+            -- Foreign key
+            , {{ dbt_utils.surrogate_key(['product.product_pk','product.name']) }} as product_sk
             , inventory.shelf
             , inventory.bin
             , inventory.quantity

@@ -21,7 +21,8 @@ with
             , sellenddate
             , discontinueddate
             , modifieddate
-            , category_name    
+            , category_name 
+            , finishedgoodsflag   
         from product
     )
 
