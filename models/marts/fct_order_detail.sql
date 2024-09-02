@@ -1,4 +1,3 @@
--- CTEs (Common Table Expressions)
 with 
     detail_cte as (
         select *
@@ -42,11 +41,16 @@ with
 
     reason_sales_cte as (
         select *
-        from {{ ref('stg_sales_order_header_reason') }}
+        from {{ ref('dim_order_reason') }}
     ),
 
+    creditcard_cte as (
+        select *
+        from {{ ref('stg_sales_creditcard') }}
+    )
+
     -- Principal table that joins all CTEs
-    complete_sales_order as (
+    , complete_sales_order as (
         select 
             -- Primary Key
             {{ dbt_utils.surrogate_key(['detail_cte.salesorderdetail_pk']) }} as salesorderdetail_pk
@@ -59,6 +63,7 @@ with
             , {{ dbt_utils.surrogate_key(['territory_cte.territory_pk']) }} as territory_fk
             , {{ dbt_utils.surrogate_key(['shipmethod_cte.shipmethod_pk']) }} as shipmethod_fk
             , {{ dbt_utils.surrogate_key(['addrees_cte.address_pk']) }} as address_fk
+            , {{ dbt_utils.surrogate_key(['creditcard_cte.creditcard_pk']) }} as creditcard_fk
 
             -- Other Fields
             , detail_cte.carriertrackingnumber
@@ -90,6 +95,8 @@ with
         on order_cte.shipmethod_fk = shipmethod_cte.shipmethod_pk
         left join addrees_cte 
         on order_cte.billtoaddress_fk = addrees_cte.address_pk
+        left join creditcard_cte
+        on order_cte.creditcard_fk = creditcard_cte.creditcard_pk
     )
 
 select *
