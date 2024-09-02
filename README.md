@@ -44,6 +44,12 @@ Para obter o arquivo token.json, é preciso criar uma service_account dentro do 
     [Passo a Passo](https://medium.com/@camila-marquess/criando-um-projeto-no-dbt-utilizando-o-bigquery-c49fc8375aa2)
 
 
+### Ingestão dos dados 
+
+A ingestão dos dados no BigQuery foi realizada utilizando o comando seeds do dbt.
+
+O comando seeds permite carregar rapidamente dados estáticos ou pequenos conjuntos de dados em tabelas do data warehouse. Esses dados geralmente estão armazenados em arquivos CSV que são colocados na pasta data do projeto dbt. Ao executar o comando dbt seed, os arquivos CSV são lidos e transformados em tabelas no BigQuery, facilitando a criação de dados de referência ou configurando dados iniciais que podem ser utilizados nas transformações posteriores.
+
 ### Techoloagias Utilizadas
 
 
@@ -230,7 +236,15 @@ Documentação e realização de testes
 
 A Aggregate é uma tabela que armazena os dados da fato com o menor nível de granularidade. Nesta tabela, os dados são consolidados para permitir análises mais rápidas e eficientes, mantendo informações essenciais para relatórios e dashboards. A Aggregate facilita o acesso a dados resumidos, preservando o detalhamento necessário para insights aprofundados.
 
-
-## Pasta Notebooks 
+## Pasta Notebooks
 
 A pasta notebook é onde estão localizados os notebooks que contêm as análises e implementações relacionadas à parte de data science do projeto.
+
+
+## Futuras Melhorias
+
+#### Ingestão de Dados
+Explorar métodos mais eficientes de ingestão, como o uso de pipelines de ETL automatizados, para melhorar o fluxo de dados e a escalabilidade do projeto.
+
+#### Utilização de Spark
+Integrar o Apache Spark para realizar predições mais robustas e escaláveis, aproveitando seu poder de processamento distribuído para lidar com grandes volumes de dados e modelos mais complexos.
