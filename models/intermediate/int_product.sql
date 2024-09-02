@@ -32,6 +32,7 @@ with
             , product.sellenddate
             , product.discontinueddate
             , product.modifieddate
+            , product.finishedgoodsflag
             , category.name as original_category_name
         from product
         left join subcategory
@@ -94,7 +95,6 @@ with
             , product.color
             , product.safetystocklevel
             , product.reorderpoint
-            , product.standardcost
             , product.daystomanufacture
             , product.productline
             , product.class
@@ -103,6 +103,8 @@ with
             , product.sellenddate
             , product.discontinueddate
             , product.modifieddate
+            , product.finishedgoodsflag
+            , product.standardcost
         from join_product as product
         left join categorized_product
             on product.product_pk = categorized_product.product_pk

@@ -1,0 +1,98 @@
+version: 2
+
+models:
+  - name: int_product
+    description: "Modelo que categoriza produtos e combina informações de produto, subcategoria e categoria."
+    columns:
+      - name: product_pk
+        description: "Chave primária do produto."
+        tests:
+          - not_null
+          - unique
+      
+      - name: name
+        description: "Nome do produto."
+        tests:
+          - not_null
+
+      - name: category_name
+        description: "Nome da categoria do produto, incluindo categorias inferidas."
+        tests:
+          - not_null
+ 
+      - name: productnumber
+        description: "Número identificador do produto."
+        tests:
+          - not_null
+          - unique
+
+      - name: color
+        description: "Cor do produto, se aplicável."
+        tests:
+          - not_null
+
+      - name: safetystocklevel
+        description: "Nível de estoque de segurança do produto."
+        tests:
+          - not_null
+          - greater_than:
+              value: 0
+
+      - name: reorderpoint
+        description: "Ponto de reordenação do produto."
+        tests:
+          - not_null
+          - greater_than:
+              value: 0
+
+      - name: daystomanufacture
+        description: "Dias necessários para fabricar o produto."
+        tests:
+          - not_null
+
+      - name: productline
+        description: "Linha de produto."
+        tests:
+          - not_null
+
+      - name: class
+        description: "Classe do produto."
+        tests:
+          - not_null
+
+      - name: style
+        description: "Estilo do produto."
+        tests:
+          - not_null
+
+      - name: sellstartdate
+        description: "Data de início das vendas do produto."
+        tests:
+          - not_null
+
+      - name: sellenddate
+        description: "Data de término das vendas do produto, se aplicável."
+        tests:
+          - not_null
+
+      - name: discontinueddate
+        description: "Data de descontinuação do produto, se aplicável."
+        tests:
+          - not_null
+
+      - name: modifieddate
+        description: "Data da última modificação do produto."
+        tests:
+          - not_null
+
+      - name: finishedgoodsflag
+        description: "Indica se o produto é um produto acabado."
+        tests:
+          - not_null
+
+      - name: standardcost
+        description: "Custo padrão do produto."
+        tests:
+          - not_null
+          - greater_than:
+              value: 0

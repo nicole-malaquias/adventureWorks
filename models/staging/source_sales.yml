@@ -56,8 +56,6 @@ sources:
           description: "Método de envio. Chave estrangeira para ShipMethod.ShipMethodID."
         - name: creditcardid
           description: "Número de identificação do cartão de crédito. Chave estrangeira para CreditCard.CreditCardID."
-          # tests:
-          #   - not_null
         - name: creditcardapprovalcode
           description: "Código de aprovação fornecido pela empresa de cartão de crédito."
         - name: currencyrateid
@@ -119,7 +117,7 @@ sources:
           tests:
             - not_null
         - name: rowguid
-          description: "Número que identifica exclusivamente o registro. Usado para suportar uma amostra de replicação de mesclagem. P Padrão: newid()"
+          description: "Número que identifica exclusivamente o registro. Usado para suportar uma amostra de replicação de mesclagem. Padrão: newid()"
           tests:
             - unique
             - not_null
@@ -127,7 +125,7 @@ sources:
           description: "Data e hora da última atualização do registro. Padrão: getdate()"
           tests:
             - not_null
-    
+
     - name: salesperson
       description: "Tabela que armazena informações sobre os vendedores." 
       columns:
@@ -138,12 +136,8 @@ sources:
             - not_null
         - name: territoryid
           description: 'Território de vendas associado ao vendedor.'
-          # tests:
-          #   - not_null
         - name: salesquota
           description: 'Meta de vendas estabelecida para o vendedor.'
-          # tests:
-          #   - not_null
         - name: bonus
           description: 'Bônus recebido pelo vendedor.'
         - name: commissionpct
@@ -195,7 +189,81 @@ sources:
           description: 'Identificador exclusivo para o registro.'
         - name: modifieddate
           description: 'Data e hora da última modificação do registro.'
+
     - name: customer
+      description: "Tabela que armazena informações sobre os clientes."
+      columns:
+        - name: customerid
+          description: "Chave primária. Identificação única do cliente."
+          tests:
+            - unique
+            - not_null
+        - name: personid
+          description: "Identificação da pessoa associada ao cliente."
+        - name: storeid
+          description: "Identificação da loja associada ao cliente."
+        - name: territoryid
+          description: "Identificação do território associado ao cliente."
+
     - name: store
+      description: "Tabela que armazena informações sobre as lojas."
+      columns:
+        - name: businessentityid
+          description: "Chave primária. Identificação única da loja."
+          tests:
+            - unique
+            - not_null
+        - name: name
+          description: "Nome da loja."
+        - name: demographics
+          description: "Informações demográficas associadas à loja."
+        - name: rowguid
+          description: "Identificador exclusivo para o registro."
+        - name: modifieddate
+          description: "Data e hora da última modificação do registro."
+
     - name: salesorderheadersalesreason
+      description: "Tabela que relaciona as razões de vendas aos cabeçalhos de pedidos de venda."
+      columns:
+        - name: salesorderid
+          description: "Chave estrangeira para SalesOrderHeader."
+          tests:
+            - not_null
+        - name: salesreasonid
+          description: "Chave estrangeira para SalesReason."
+          tests:
+            - not_null
+
     - name: salesreason
+      description: "Tabela que armazena as razões para vendas."
+      columns:
+        - name: salesreasonid
+          description: "Chave primária. Identificação única da razão de venda."
+          tests:
+            - unique
+            - not_null
+        - name: name
+          description: "Nome da razão de venda."
+        - name: reasontype
+          description: "Tipo de razão de venda."
+        - name: modifieddate
+          description: "Data e hora da última modificação do registro."
+    
+    - name: creditcard
+      description: "Tabela que armazena informações sobre cartões de crédito."
+      columns:
+        - name: creditcardid
+          description: "Chave primária. Identificação única do cartão de crédito."
+          tests:
+            - unique
+            - not_null
+        - name: cardtype
+          description: "Tipo de cartão de crédito."
+        - name: cardnumber
+          description: "Número do cartão de crédito."
+        - name: expmonth
+          description: "Mês de expiração do cartão de crédito."
+        - name: expyear
+          description: "Ano de expiração do cartão de crédito."
+        - name: modifieddate
+          description: "Data e hora da última modificação do registro."

@@ -8,6 +8,7 @@ with
             , productmodelid as productmodel_fk
             -- Others Columns
             , name
+            , finishedgoodsflag
             , productnumber
             , color
             , safetystocklevel
