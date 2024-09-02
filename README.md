@@ -1,6 +1,6 @@
 ### Clonando o projeto
 
-Primeiro, você precisa clonar o repositório localmente. Você deve fazer isso acessando o repositório do projeto no Bitbucket. O projeto pode ser clonado via SSH ou HTTPS usando o comando git clone no link. Ex.:
+Primeiro, você precisa clonar o repositório localmente. Você deve fazer isso acessando o repositório do projeto no GitHub. O projeto pode ser clonado via SSH ou HTTPS usando o comando git clone no link. Ex.:
 
 - `git clone git@github.com:nicole-malaquias/adventureWorks.git`
 
