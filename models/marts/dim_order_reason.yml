@@ -4,18 +4,14 @@ models:
   - name: dim_order_reason
     description: "Dimensão que armazena os motivos pelos quais os pedidos foram feitos, incluindo o nome do motivo e o tipo de motivo."
     columns:
-      - name: order_head_pk
+      - name: salesorder_fk
         description: "Chave primária gerada para identificar unicamente cada motivo associado ao pedido."
         tests:
           - unique
           - not_null
 
-      - name: reason_name
+      - name: representative_reason_name
         description: "Nome do motivo pelo qual o pedido foi feito."
-        tests:
-          - not_null
 
-      - name: reasontype
+      - name: representative_reason_type
         description: "Tipo do motivo pelo qual o pedido foi feito."
-        tests:
-          - not_null

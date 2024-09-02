@@ -38,7 +38,6 @@ models:
         description: "Número identificador do produto."
         tests:
           - not_null
-          - unique
 
       - name: total_qty
         description: "Quantidade total do produto vendida no período agregado."

@@ -4,7 +4,7 @@ models:
   - name: dim_person
     description: "Tabela de dimensão contendo informações das pessoas."
     columns:
-      - name: person_pk
+      - name: person_sk
         description: "Chave primária gerada para identificar unicamente uma pessoa."
         tests:
           - unique
