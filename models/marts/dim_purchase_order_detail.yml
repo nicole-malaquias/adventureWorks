@@ -1,0 +1,41 @@
+version: 2
+
+models:
+
+  - name: dim_purchase_order_detail 
+    description: "This model represents the purchase order details."
+    columns:
+      - name: purchaseorderdetail_pk
+        description: "The primary key of the purchase order detail. Represents the unique identifier for the purchase order detail."
+        tests:
+          - unique
+          - not_null
+      - name: purchaseorder_fk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fact_purchase_order_header')
+              field: purchaseorder_pk
+      - name: product_fk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fact_product')
+              field: product_pk
+      - name: unit_price
+        description: "The unit price of the product."
+        tests:
+          - not_null
+      - name: order_qty
+        description: "The quantity of the product ordered."
+        tests:
+          - not_null
+      - name: received_qty  
+        description: "The quantity of the product received."
+        tests:
+          - not_null
+      - name: rejected_qty
+        description: "The quantity of the product rejected."
+        tests:
+          - not_null
+

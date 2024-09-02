@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: dim_person_address
+    description: "Tabela de dimensão contendo endereços de pessoas, associada a uma província."
+    columns:
+      - name: address_pk
+        description: "Chave primária gerada para o endereço."
+        tests:
+          - unique
+          - not_null
+
+      - name: state_province_fk
+        description: "Chave estrangeira referenciando a província associada ao endereço."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_person_state_province')
+              field: state_province_pk
+
+      - name: addressline1
+        description: "Primeira linha do endereço."
+        tests:
+          - not_null
+
+      - name: addressline2
+        description: "Segunda linha do endereço (opcional)."
+      
+      - name: city
+        description: "Cidade do endereço."
+        tests:
+          - not_null
+
+      - name: postalcode
+        description: "Código postal do endereço."
+        tests:
+          - not_null
+
+      - name: spatiallocation
+        description: "Localização espacial do endereço (opcional)."

@@ -2,8 +2,8 @@ with
     source as (
         select
             -- Primary key
-            shipmethodid
-            -- Stich Columns
+            shipmethodid as shipmethod_pk
+            -- Others Columns
             , name
             , shipbase
             , shiprate

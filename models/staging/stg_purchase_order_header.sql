@@ -1,23 +1,28 @@
 with
     source as (
         select
-            -- Primary Key
+            -- primary key
             purchaseorderid as purchaseorder_pk
-            -- Foreign Keys
-            , employeeid as employee_fk
-            , vendorid as vendor_fk
+            -- foreign keys
             , shipmethodid as shipmethod_fk
-            -- Stich Columns
+            -- other columns
             , revisionnumber
-            , status
+            -- transformar o status em uma descrição mais amigável
+            , case 
+                when status = 1 then 'pending'
+                when status = 2 then 'approved'
+                when status = 3 then 'rejected'
+                when status = 4 then 'complete'
+                else 'unknown'
+            end as pur_status  
             , cast(orderdate as timestamp) as orderdate
             , cast(shipdate as timestamp) as shipdate
             , subtotal
             , taxamt
             , freight
-            , modifieddate
+            , subtotal + taxamt + freight as totaldue
         from {{ source('adventure_works', 'purchaseorderheader') }}
     )
 
 select *
-from source 
+from source

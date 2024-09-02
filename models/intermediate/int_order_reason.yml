@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: int_order_reason
+    description: "Modelo que representa a principal razão de vendas para cada pedido, extraindo a primeira razão e tipo de razão das listas de razões agregadas."
+    columns:
+      - name: salesorder_fk
+        description: "Chave estrangeira que referencia o pedido de venda."
+        tests:
+          - not_null

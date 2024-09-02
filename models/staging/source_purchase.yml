@@ -22,14 +22,6 @@ sources:
           description: 'Status do pedido de compra.'
           tests:
             - not_null
-        - name: EmployeeID
-          description: 'Identificação do funcionário que criou o pedido de compra.'
-          tests:
-            - not_null
-        - name: VendorID
-          description: 'Identificação do fornecedor.'
-          tests:
-            - not_null
         - name: ShipMethodID
           description: 'Identificação do método de envio.'
           tests:
@@ -56,8 +48,6 @@ sources:
             - not_null
         - name: TotalDue
           description: 'Valor total devido.'
-        - name: ModifiedDate
-          description: 'Data de modificação do pedido.'
 
     - name: purchaseorderdetail
       description: 'Tabela contendo informações detalhadas sobre os produtos de um pedido de compra.'

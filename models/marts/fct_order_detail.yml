@@ -1,0 +1,125 @@
+version: 2
+
+models:
+  - name: complete_sales_order
+    description: "Tabela de fato que armazena informações completas sobre pedidos de vendas, incluindo detalhes do pedido, cliente, produto, vendedor, território e método de envio."
+    columns:
+      - name: salesorderdetail_pk
+        description: "Chave primária gerada para identificar unicamente cada detalhe do pedido de venda."
+        tests:
+          - unique
+          - not_null
+
+      - name: salesorder_fk
+        description: "Chave estrangeira referenciando o pedido de venda."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_sales_order')
+              field: salesorder_pk
+
+      - name: product_fk
+        description: "Chave estrangeira referenciando o produto vendido."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_pk
+
+      - name: sales_person_fk
+        description: "Chave estrangeira referenciando o vendedor associado ao pedido."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_sales_person')
+              field: salesperson_pk
+
+      - name: customer_fk
+        description: "Chave estrangeira referenciando o cliente que fez o pedido."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_sales_customer')
+              field: customer_pk
+
+      - name: territory_fk
+        description: "Chave estrangeira referenciando o território de vendas associado ao pedido."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_sales_territory')
+              field: territory_pk
+
+      - name: shipmethod_fk
+        description: "Chave estrangeira referenciando o método de envio utilizado."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_shipmethod')
+              field: ship_method_sk
+
+      - name: carriertrackingnumber
+        description: "Número de rastreamento do transportador associado ao pedido."
+      
+      - name: orderdate
+        description: "Data em que o pedido foi feito."
+        tests:
+          - not_null
+
+      - name: duedate
+        description: "Data de vencimento do pedido."
+        tests:
+          - not_null
+
+      - name: shipdate
+        description: "Data de envio do pedido."
+        tests:
+          - not_null
+
+      - name: status_description
+        description: "Descrição do status do pedido."
+
+      - name: onlineorderflag
+        description: "Indicador se o pedido foi feito online."
+      
+      - name: subtotal
+        description: "Subtotal do pedido."
+        tests:
+          - not_null
+
+      - name: taxamt
+        description: "Valor do imposto associado ao pedido."
+        tests:
+          - not_null
+
+      - name: orderqty
+        description: "Quantidade de itens no pedido."
+        tests:
+          - not_null
+
+      - name: unitprice
+        description: "Preço unitário do item vendido."
+        tests:
+          - not_null
+
+      - name: unitpricediscount
+        description: "Desconto aplicado no preço unitário do item."
+
+      - name: modifieddate
+        description: "Data da última modificação do registro."
+
+      - name: address_fk
+        description: "Chave estrangeira referenciando o endereço de cobrança associado ao pedido."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_address')
+              field: address_pk
+
+      - name: order_header_reason_fk
+        description: "Chave estrangeira referenciando o motivo associado ao pedido."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_order_reason')
+              field: order_reason_pk

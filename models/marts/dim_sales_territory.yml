@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: dim_sales_territory
+    description: "Tabela de dimensão que armazena informações sobre territórios de vendas, incluindo nome, código de região, grupo de território e dados financeiros."
+    columns:
+      - name: territory_pk
+        description: "Chave primária gerada para identificar unicamente um território."
+        tests:
+          - unique
+          - not_null
+
+      - name: name
+        description: "Nome do território."
+        tests:
+          - not_null
+
+      - name: countryregioncode
+        description: "Código da região do país associada ao território."
+        tests:
+          - not_null
+
+      - name: group_territory
+        description: "Grupo ao qual o território pertence."
+        tests:
+          - not_null
+
+      - name: saleslastyear
+        description: "Vendas do último ano associadas ao território."
+        tests:
+          - not_null
+
+      - name: costytd
+        description: "Custo acumulado até a data associado ao território."
+        tests:
+          - not_null
+
+      - name: costlastyear
+        description: "Custo do último ano associado ao território."
+        tests:
+          - not_null

@@ -9,7 +9,7 @@ sources:
     - name: product
       description: 'Tabela contendo informações detalhadas sobre os produtos.'
       columns:
-        - name: productid
+        - name: product
           description: 'Identificação única do produto.'
           tests:
             - unique
@@ -114,5 +114,45 @@ sources:
             - not_null
         - name: ModifiedDate
           description: 'Data e hora da última atualização do registro. Padrão: getdate().'
+          tests:
+            - not_null
+
+    - name: productsubcategory
+      columns:
+        - name: productsubcategoryid
+          description: 'Identificação única da subcategoria de produto.'
+          tests:
+            - unique
+            - not_null
+        - name: productcategoryid
+          description: 'Identificação única da categoria de produto.'
+          tests:
+            - not_null
+        - name: name  
+          description: 'Nome da subcategoria de produto.'
+          tests:
+            - not_null
+
+    - name: location 
+      columns:
+        - name: locationid
+          description: 'Identificação única da localização.'
+          tests:
+            - unique
+            - not_null
+        - name: name
+          description: 'Nome da localização.'
+          tests:
+            - not_null
+        - name: costrate
+          description: 'Taxa de custo da localização.'
+          tests:
+            - not_null
+        - name: availability
+          description: 'Disponibilidade da localização.'
+          tests:
+            - not_null
+        - name: modifieddate
+          description: 'Data e hora da última atualização do registro.'
           tests:
             - not_null

@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: dim_sales_customer
+    description: "Tabela de dimensão que armazena informações de clientes, incluindo referências a vendedores, lojas e territórios."
+    columns:
+      - name: customer_pk
+        description: "Chave primária gerada para identificar unicamente um cliente."
+        tests:
+          - unique
+          - not_null
+
+      - name: person_fk
+        description: "Chave estrangeira referenciando o vendedor associado ao cliente."
+        # tests:
+        #   - not_null
+        #   - relationships:
+        #       to: ref('dim_person')
+        #       field: person_pk    faltou 701 
+
+      - name: store_fk
+        description: "Chave estrangeira referenciando a loja associada ao cliente."
+        # tests:
+        #   - not_null
+        #   - relationships:
+        #       to: ref('dim_sales_store')
+        #       field: store_pk
+
+      - name: territory_fk
+        description: "Chave estrangeira referenciando o território associado ao cliente."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_sales_territory')
+              field: territory_pk

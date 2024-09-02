@@ -5,7 +5,7 @@ with
             businessentityid as salesperson_pk
             -- Foreign Key
             , territoryid as territory_fk
-            -- Stitch Columns
+            -- Others Columns
             , salesquota
             , bonus 
             , commissionpct as commissionpct

@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: dim_product
+    description: >
+      Esta tabela de fato armazena informações detalhadas sobre os produtos, incluindo suas subcategorias, características, e detalhes de venda. Ela integra dados das tabelas de subcategoria de produto e vendedor de vendas para fornecer uma visão abrangente dos produtos disponíveis.
+
+    columns:
+      - name: product_pk
+        description: "A chave primária da tabela de fato de produtos. Representa o identificador único para cada produto."
+        tests:
+          - unique
+          - not_null
+
+      - name: productsubcategory_fk
+        description: "A chave estrangeira que referencia a subcategoria à qual o produto pertence."
+        # tests:
+        #   - not_null
+        #   - relationships:
+        #       to: ref('dim_product_subcategory')
+        #       field: productsubcategory_pk
+
+      - name: name
+        description: "O nome do produto."
+        tests:
+          - not_null
+
+      - name: productnumber
+        description: "O número identificador do produto."
+
+      - name: color
+        description: "A cor do produto."
+
+      - name: safetystocklevel
+        description: "O nível de estoque de segurança do produto."
+
+      - name: reorderpoint
+        description: "O ponto de reordenação do produto, indicando quando o estoque deve ser reposto."
+
+      - name: standardcost
+        description: "O custo padrão do produto."
+
+      - name: sells_price
+        description: "O preço de venda do produto."
+
+      - name: daystomanufacture
+        description: "O número de dias necessários para fabricar o produto."
+
+      - name: productline
+        description: "A linha de produtos à qual o produto pertence."
+
+      - name: class
+        description: "A classificação do produto."
+
+      - name: style
+        description: "O estilo do produto."
+  
+
+      - name: sellstartdate
+        description: "A data de início das vendas do produto."
+        tests:
+          - not_null
+
+      - name: sellenddate
+        description: "A data de término das vendas do produto, se aplicável."
+        # tests:  
+        #   - not_null
+
+      - name: discontinueddate
+        description: "A data em que o produto foi descontinuado, se aplicável."
+        # tests:
+        #   - not_null
+
+      - name: modifieddate
+        description: "A data da última modificação dos dados do produto."
+        tests:
+          - not_null
